@@ -1,0 +1,15 @@
+# Python 快取
+__pycache__/
+*.pyc
+
+# 虛擬環境
+.venv/
+venv/
+
+# 編輯器設定
+.vscode/
+.idea/
+
+# 環境變數與機密資料
+.env
+.streamlit/secrets.toml
