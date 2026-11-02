@@ -37,6 +37,16 @@ st.sidebar.write("查看各種分析/視覺化")
 
 st.sidebar.caption(f"📊 當前資料總量：**{len(df)}** 筆")
 
+# Plotly 圖表主題
+st.sidebar.markdown("---")
+selected_theme = st.sidebar.selectbox("圖表主題", ["淺色", "深色"])
+chart_template = "plotly_white" if selected_theme == "淺色" else "plotly_dark"
+
+def show_chart(fig):
+    """統一套用 Plotly 原生主題，並以容器寬度顯示互動圖表。"""
+    fig.update_layout(template=chart_template)
+    st.plotly_chart(fig, width="stretch", theme=None)
+
 def show_chart(fig):
     """統一管理plotly的顯示方式"""
     st.plotly_chart(fig, width="stretch", theme=None)
@@ -64,21 +74,21 @@ with tab1:# 第一頁：交易量分布
         col1, col2 = st.columns(2)
         with col1:
             st.header("總交易分布圖")
-            fig = vis.plot_transaction_bar(all_counts.sort_values(),"2017~2026年")
+            fig = vis.plot_transaction_bar(all_counts.sort_values(),"2017~2026年", template=chart_template)
             show_chart(fig)
         with col2:
             st.header("年度交易分布圖")
-            fig = vis.plot_transaction_bar(year_counts.sort_values(), f"請選擇查詢的📆年份：{selected_year}年")
+            fig = vis.plot_transaction_bar(year_counts.sort_values(), f"請選擇查詢的📆年份：{selected_year}年", template=chart_template)
             show_chart(fig)
 
         col1, col2 = st.columns(2)
         with col1:
             st.header("總交易占比圖")
-            fig = vis.plot_transaction_pie(all_pie_data, "2017~2026年")
+            fig = vis.plot_transaction_pie(all_pie_data, "2017~2026年", template=chart_template)
             show_chart(fig)
         with col2:
             st.header("年度交易占比圖")
-            fig = vis.plot_transaction_pie(year_pie_data, f"請選擇查詢的📆年份：{selected_year}年")
+            fig = vis.plot_transaction_pie(year_pie_data, f"請選擇查詢的📆年份：{selected_year}年", template=chart_template)
             show_chart(fig)
 
 
@@ -95,21 +105,21 @@ with tab2:#第二頁：各區的交易趨勢
         col1, col2 = st.columns(2)
         with col1:
             st.header("整體趨勢圖")
-            fig = vis.plot_yearly_transaction_trend(df_n, "2017~2026年")
+            fig = vis.plot_yearly_transaction_trend(df_n, "2017~2026年", template=chart_template)
             show_chart(fig)
         with col2:
             st.header("區域趨勢")
-            fig = vis.plot_area_transaction_bar(area_data, f"請選擇查詢的🧭區域：{selected_area}")
+            fig = vis.plot_area_transaction_bar(area_data, f"請選擇查詢的🧭區域：{selected_area}", template=chart_template)
             show_chart(fig)
 
         col1, col2 = st.columns(2)
         with col1:
             st.header("全區態勢圖")
-            fig = vis.plot_all_area_transaction_trend(df_gr, "2017~2026年")
+            fig = vis.plot_all_area_transaction_trend(df_gr, "2017~2026年", template=chart_template)
             show_chart(fig)
         with col2:
             st.header("區域趨勢")
-            fig = vis.plot_area_transaction_line(area_data, f"請選擇查詢的🧭區域：{selected_area}")
+            fig = vis.plot_area_transaction_line(area_data, f"請選擇查詢的🧭區域：{selected_area}", template=chart_template)
             show_chart(fig)
 
 
@@ -125,11 +135,11 @@ with tab3:# 第三頁：建物坪數分析
         col1, col2 = st.columns(2)
         with col1:
             st.header("區域坪數(中位數)")
-            fig = vis.plot_district_median_ping(median_data,f"請選擇查詢的📆年份：{selected_year}年")
+            fig = vis.plot_district_median_ping(median_data,f"請選擇查詢的📆年份：{selected_year}年", template=chart_template)
             show_chart(fig)
         with col2:
             st.header("區域坪數分布")
-            fig = vis.plot_area_ping_hist(ping_data,f"請選擇查詢的🧭和📆：{selected_area} {selected_year}年")
+            fig = vis.plot_area_ping_hist(ping_data,f"請選擇查詢的🧭和📆：{selected_area} {selected_year}年", template=chart_template)
             show_chart(fig)
 
 
@@ -145,11 +155,11 @@ with tab4:# 第四頁：總價趨勢分析
         col1, col2 = st.columns(2)
         with col1:
             st.header("總價平均")
-            fig = vis.plot_area_total_price(avg_price,f"請選擇查詢的🧭區域趨勢：{selected_area} ")
+            fig = vis.plot_area_total_price(avg_price,f"請選擇查詢的🧭區域趨勢：{selected_area} ", template=chart_template)
             show_chart(fig)
         with col2:
             st.header("總價中位數")
-            fig = vis.plot_area_total_price(median_price,f"請選擇查詢的🧭區域趨勢：{selected_area} ")
+            fig = vis.plot_area_total_price(median_price,f"請選擇查詢的🧭區域趨勢：{selected_area} ", template=chart_template)
             show_chart(fig)
 
 
@@ -165,20 +175,20 @@ with tab5:# 第五頁：建物型態與單價分析
 
         with col1:
             st.header("型態的交易差")
-            fig = vis.plot_building_type_count(area_year_df,f"請選擇🧭和📆：{selected_area} {selected_year}年")
+            fig = vis.plot_building_type_count(area_year_df,f"請選擇🧭和📆：{selected_area} {selected_year}年", template=chart_template)
             show_chart(fig)
 
         with col2:
             st.header("型態的價格差")
-            fig = vis.plot_building_type_price_box(area_year_df,"")
+            fig = vis.plot_building_type_price_box(area_year_df,"", template=chart_template)
             show_chart(fig)
 
         with col3:
             st.header("管理的價格差")
-            fig = vis.plot_management_price_box(area_year_df,"")
+            fig = vis.plot_management_price_box(area_year_df,"", template=chart_template)
             show_chart(fig)
 
         with col4:
             st.header("單價中位數")
-            fig = vis.plot_area_price_box(area_year_df,"")
+            fig = vis.plot_area_price_box(area_year_df,"", template=chart_template)
             show_chart(fig)
