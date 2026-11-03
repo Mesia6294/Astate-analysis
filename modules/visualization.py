@@ -15,7 +15,6 @@ def plot_transaction_bar(counts: pd.Series, title: str, template: str = DEFAULT_
         y="鄉鎮市區",
         orientation="h",
         title=title,
-        labels={"交易次數": "交易次數", "鄉鎮市區": "鄉鎮市區"},
         template=template
     )
     fig.update_layout(height=450, margin=dict(l=20, r=20, t=60, b=30))
@@ -63,7 +62,6 @@ def plot_area_transaction_bar(area_data: pd.Series, title: str, template: str = 
         x="交易年",
         y="交易數量",
         title=title,
-        labels={"交易年": "交易年", "交易數量": "交易數量"},
         template=template
     )
     fig.update_layout(height=450, margin=dict(l=20, r=20, t=60, b=40))
@@ -82,7 +80,6 @@ def plot_all_area_transaction_trend(data: pd.DataFrame, title: str, template: st
         color="鄉鎮市區",
         markers=True,
         title=title,
-        labels={"交易年": "交易年", "交易數量": "交易數量", "鄉鎮市區": "鄉鎮市區"},
         template=template
     )
     fig.update_layout(
@@ -103,7 +100,6 @@ def plot_area_transaction_line(area_data: pd.Series, title: str, template: str =
         y="交易數量",
         markers=True,
         title=title,
-        labels={"交易年": "交易年", "交易數量": "交易數量"},
         template=template
     )
     fig.update_layout(height=450, margin=dict(l=20, r=20, t=60, b=40))
@@ -118,7 +114,6 @@ def plot_district_median_ping(ping_data: pd.Series, title: str, template: str = 
         x="鄉鎮市區",
         y="坪數（坪）",
         title=title,
-        labels={"鄉鎮市區": "鄉鎮市區", "坪數（坪）": "坪數（坪）"},
         template=template
     )
     fig.update_yaxes(range=[20, 60])
@@ -150,7 +145,6 @@ def plot_area_total_price(price_data: pd.Series, title: str, template: str = DEF
         y="總價（萬元）",
         markers=True,
         title=title,
-        labels={"交易年": "交易年", "總價（萬元）": "總價（萬元）"},
         template=template
     )
     fig.update_xaxes(tickmode="array", tickvals=list(price_data.index))
@@ -166,7 +160,6 @@ def plot_building_type_count(data: pd.DataFrame, title: str, template: str = DEF
         y="交易數量",
         color="建物型態",
         title=title,
-        labels={"建物型態": "建物型態", "交易數量": "交易數量"},
         template=template
     )
     # 保留原圖設定：隱藏 X 軸各類別文字。
@@ -183,7 +176,6 @@ def plot_building_type_price_box(data: pd.DataFrame, title: str, template: str =
         color="建物型態",
         points=False,
         title=title,
-        labels={"建物型態": "建物型態", "每坪單價": "每坪單價（元）"},
         template=template
     )
     fig.update_xaxes(showticklabels=False, title_text="建物型態")
@@ -199,7 +191,6 @@ def plot_management_price_box(data: pd.DataFrame, title: str, template: str = DE
         color="有無管理",
         points=False,
         title=title,
-        labels={"有無管理": "有無管理", "每坪單價": "每坪單價（元）"},
         template=template
     )
     fig.update_layout(showlegend=False, height=450, margin=dict(l=15, r=15, t=70, b=55))
