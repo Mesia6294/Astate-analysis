@@ -22,7 +22,7 @@ df = preprocess_data(df)
 
 st.sidebar.markdown("## 你好~💕")
 st.sidebar.markdown("## 🔎 選擇查詢選項")
-# Sidebar：全站共用篩選器
+# Sidebar：篩選器
 # 年份
 years = sorted(df["交易年"].unique())
 selected_year = st.sidebar.selectbox("選擇交易年", years,index=8)
@@ -40,7 +40,7 @@ st.sidebar.caption(f"📊 當前資料總量：**{len(df)}** 筆")
 
 
 def show_chart(fig):
-    """統一管理plotly的顯示方式"""
+    """管理plotly的顯示方式"""
     st.plotly_chart(fig, width="stretch", theme="streamlit")
 
 
