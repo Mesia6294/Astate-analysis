@@ -130,12 +130,12 @@ def plot_area_ping_hist(ping_data: pd.Series, title: str):
     return fig
 
 def plot_area_total_price(price_data: pd.Series, title: str):
-    """區域年度總價趨勢，單位轉換為萬元。"""
-    plot_data = pd.DataFrame({"交易年": price_data.index, "總價（萬元）": price_data.values / 10000})
+    """區域年度價格趨勢，單位轉換為萬元。"""
+    plot_data = pd.DataFrame({"交易年": price_data.index, "價格（萬元）": price_data.values / 10000})
     fig = px.line(
         plot_data,
         x="交易年",
-        y="總價（萬元）",
+        y="價格（萬元）",
         markers=True,
         title=title
     )

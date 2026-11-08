@@ -49,7 +49,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "交易量分布",
     "各區交易趨勢",
     "建物坪數分析",
-    "總價趨勢",
+    "價格趨勢",
     "建物型態與管理",
 ])
 
@@ -136,17 +136,17 @@ with tab3:# 第三頁：建物坪數分析
 
 
 
-with tab4:# 第四頁：總價趨勢分析
-    st.caption("📌 總價(平均)、(坪數中位x單價中位)，更真實的價位可以參考")
+with tab4:# 第四頁：價格趨勢分析
+    st.caption("📌 每坪單價中位數、(坪數中位x單價中位)，更真實的價位可以參考")
     left, center, right = st.columns([1, 8, 1])
     
-    avg_price = ana.area_average_total_price(df, selected_area)
+    avg_price = ana.area_median_ping_price(df, selected_area)
     median_price = ana.area_median_estimated_total_price(df, selected_area)
 
     with center:
         col1, col2 = st.columns(2)
         with col1:
-            st.header("總價平均")
+            st.header("每坪單價中位數")
             fig = vis.plot_area_total_price(avg_price,f"請選擇查詢的🧭區域趨勢：{selected_area} ")
             show_chart(fig)
         with col2:

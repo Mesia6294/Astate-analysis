@@ -42,10 +42,10 @@ def area_ping_distribution(df: pd.DataFrame,area: str,year: int) -> pd.Series:
     area_df = df[(df["鄉鎮市區"] == area) &(df["交易年"] == year)]
     return area_df["轉移坪數"]
 
-def area_average_total_price(df: pd.DataFrame,area: str) -> pd.Series:
-    """指定區域每年度的平均總價。"""
+def area_median_ping_price(df: pd.DataFrame,area: str) -> pd.Series:
+    """指定區域每年度的每坪單價中位數。"""
     area_df = df[df["鄉鎮市區"] == area]
-    return area_df.groupby("交易年")["總價元"].mean().sort_index()
+    return area_df.groupby("交易年")["每坪單價"].median().sort_index()
 
 def area_median_estimated_total_price(df: pd.DataFrame,area: str) -> pd.Series:
     """指定區域每年度的中位數坪數 × 中位數每坪單價。"""
