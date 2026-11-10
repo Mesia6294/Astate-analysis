@@ -119,7 +119,6 @@ def plot_area_ping_hist(ping_data: pd.Series, title: str):
     """區域建物坪數直方圖。"""
     fig = px.histogram(
         x=ping_data,
-        nbins=30,
         title=title,
         labels={"x": "坪數（坪）", "count": "交易筆數"}
     )
